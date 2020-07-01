@@ -1,0 +1,172 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: gitea
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: gitea
+  namespace: gitea
+spec:
+  selector:
+    app: gitea
+  ports:
+    - protocol: TCP
+      name: http
+      port: 3000
+    - protocol: TCP
+      name: ssh
+      port: 22
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgres
+  namespace: gitea
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: gitea-env
+  namespace: gitea
+data:
+  USER_UID: "1000"
+  USER_GID: "1000"
+  DB_TYPE: postgres
+  DB_HOST: postgres:5432
+  DB_USER: gitea
+  DB_PASSWD: gitea
+  ROOT_URL: https://git.rappet.xyz/
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: postgres-env
+  namespace: gitea
+data:
+  POSTGRES_USER: gitea
+  POSTGRES_PASSWORD: gitea
+  POSTGRES_DB: gitea
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: gitea-data
+  namespace: gitea
+spec:
+  storageClassName: microk8s-hostpath
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-data
+  namespace: gitea
+spec:
+  storageClassName: microk8s-hostpath
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: gitea
+  namespace: gitea
+spec:
+  selector:
+    matchLabels:
+      app: gitea
+  template:
+    metadata:
+      labels:
+        app: gitea
+    spec:
+      containers:
+        - name: gitea
+          image: gitea/gitea:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+            - containerPort: 22
+          volumeMounts:
+            - mountPath: /data
+              name: data
+          envFrom:
+            - configMapRef:
+                name: gitea-env
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: gitea-data
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: postgres
+  namespace: gitea
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: data
+          envFrom:
+            - configMapRef:
+                name: postgres-env
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: postgres-data
+
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+metadata:
+  name: gitea-ingress
+  namespace: gitea
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  rules:
+    - host: git.rappet.xyz
+      http:
+        paths:
+          - backend:
+              serviceName: gitea
+              servicePort: 3000
+  tls:
+    - hosts:
+        - git.rappet.xyz
+      secretName: gitea-ingress-cert
