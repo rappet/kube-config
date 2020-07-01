@@ -6,3 +6,6 @@ My Kubernetes config
 Just use letsencrypt-prod. buypass is broken.
 
 # !! This is experimental work in progress code, untested and contains security flaws
+
+prometheus+grafana is broken.
+I currently use the in build prometheus from microk8s
