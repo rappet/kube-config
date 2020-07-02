@@ -1,0 +1,5 @@
+namespace: flux
+resources:
+  - github.com/fluxcd/flux//deploy
+patchesStrategicMerge:
+  - path.yaml
