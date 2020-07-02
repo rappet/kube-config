@@ -6,3 +6,4 @@ namespace: drone
 resources:
   - namespace.yaml
   - drone.yaml
+  - runner.yaml
