@@ -17,3 +17,4 @@ spec:
             - --git-user=rappet
             - --git-email=raphael.r.peters@gmail.com
             - --git-url=git@github.com:rappet/kube-config
+            - --sync-garbage-collection
