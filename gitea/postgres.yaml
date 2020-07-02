@@ -1,0 +1,61 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgres
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: postgres-env
+data:
+  POSTGRES_USER: gitea
+  POSTGRES_PASSWORD: gitea
+  POSTGRES_DB: gitea
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-data
+spec:
+  storageClassName: microk8s-hostpath
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: data
+          envFrom:
+            - configMapRef:
+                name: postgres-env
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: postgres-data

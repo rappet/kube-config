@@ -1,3 +1,4 @@
+# This file only adds a Ingress to the grafana shipped with microk8s
 kind: Ingress
 apiVersion: networking.k8s.io/v1beta1
 metadata:
