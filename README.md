@@ -1,11 +1,7 @@
-# :wip: kube-config
-My Kubernetes config
+My Kubernetes deployments
 
-## Cert-Manager
+Every folder contains a kustomization which is deployed by Flux [flux].
+(see [flux-kustomize-example] on how to use Flux with Kustomize)
 
-Just use letsencrypt-prod. buypass is broken.
-
-# !! This is experimental work in progress code, untested and contains security flaws
-
-prometheus+grafana is broken.
-I currently use the in build prometheus from microk8s
+[flux]: https://fluxcd.io/
+[flux-kustomize-example]: https://github.com/fluxcd/flux-kustomize-example
