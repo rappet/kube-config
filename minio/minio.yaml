@@ -86,7 +86,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: letsencrypt-prod
     ingress.kubernetes.io/proxy-body-size: "0"
-    nginx.org/client-max-body-size: "0"
+    nginx.org/client-max-body-size: 500m
 spec:
   rules:
     - host: s3.rappet.xyz
