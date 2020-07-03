@@ -85,7 +85,6 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: letsencrypt-prod
-#    nginx.ingress.kubernetes.io/limit-rate: "0"
     ingress.kubernetes.io/proxy-body-size: "500m"
     nginx.org/client-max-body-size: "500m"
 spec:
