@@ -97,7 +97,7 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: gitea
+              serviceName: gitea-http
               servicePort: 3000
   tls:
     - hosts:
