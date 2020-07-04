@@ -1,17 +1,29 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gitea
+  name: gitea-http
 spec:
   selector:
     app: gitea
   ports:
-    - protocol: TCP
-      name: http
+    - name: http
+      protocol: TCP
       port: 3000
-    - protocol: TCP
-      name: ssh
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitea-ssh
+spec:
+  type: NodePort
+  selector:
+    app: gitea
+  ports:
+    - name: ssh
+      protocol: TCP
       port: 22
+      targetPort: 22
+      nodePort: 30022
 ---
 apiVersion: v1
 kind: ConfigMap
