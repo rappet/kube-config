@@ -50,8 +50,22 @@ spec:
           - backend:
               serviceName: blog
               servicePort: 80
+    - host: rappet.de
+      http:
+        paths:
+          - backend:
+              serviceName: blog
+              servicePort: 80
+    - host: www.rappet.de
+      http:
+        paths:
+          - backend:
+              serviceName: blog
+              servicePort: 80
   tls:
     - hosts:
         - rappet.xyz
         - www.rappet.xyz
+        - rappet.de
+        - www.rappet.de
       secretName: blog-ingress-cert
