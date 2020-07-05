@@ -13,7 +13,7 @@ spec:
             - --memcached-hostname=memcached.flux
             - --ssh-keygen-dir=/var/fluxd/keygen
             - --git-branch=master
-            - --git-path=fluxcd,ingress,cert-manager,grafana,minio,gitea,drone,foo-testpage,blog
+            - --git-path=fluxcd,cert-manager,grafana,minio,gitea,drone,foo-testpage,blog
             - --git-user=rappet
             - --git-email=raphael.r.peters@gmail.com
             - --git-url=git@github.com:rappet/kube-config
