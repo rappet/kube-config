@@ -89,6 +89,8 @@ metadata:
     # Things gitea does not like: many requests
     nginx.ingress.kubernetes.io/limit-rps: "5"
     nginx.ingress.kubernetes.io/limit-rpm: "30"
+    nginx.org/client-max-body-size: "200m"
+    nginx.ingress.kubernetes.io/proxy-body-size: "200m"
 spec:
   rules:
     - host: git.rappet.xyz
