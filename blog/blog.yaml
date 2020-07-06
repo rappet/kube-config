@@ -15,8 +15,6 @@ kind: Deployment
 metadata:
   name: blog
   annotations:
-    fluxcd.io/automated: "true"
-    fluxcd.io/tag.app: semver:~0
 spec:
   selector:
     matchLabels:
@@ -28,7 +26,7 @@ spec:
     spec:
       containers:
         - name: blog
-          image: rappet/rappetxyz:0.1.0
+          image: rappet/rappetxyz:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
