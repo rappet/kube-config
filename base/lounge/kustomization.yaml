@@ -6,3 +6,8 @@ namespace: lounge
 resources:
   - namespace.yaml
   - lounge.yaml
+
+configMapGenerator:
+  - name: lounge-config
+    files:
+      - config/config.js

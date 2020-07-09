@@ -44,10 +44,16 @@ spec:
           volumeMounts:
             - mountPath: /var/opt/thelounge
               name: data
+            - mountPath: /var/opt/thelounge/config.js
+              name: config
+              subPath: config.js
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: lounge-data
+        - name: config
+          configMap:
+            name: lounge-config
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
