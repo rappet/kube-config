@@ -74,8 +74,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: gitea-env
-          command:
-            - bash
       volumes:
         - name: data
           persistentVolumeClaim:
