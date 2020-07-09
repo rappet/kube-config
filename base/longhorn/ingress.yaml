@@ -19,8 +19,7 @@ spec:
           - backend:
               serviceName: longhorn-frontend
               servicePort: 80
-# TODO: Fix Longhorn's API which is not able to operate using https
-#  tls:
-#    - hosts:
-#        - longhorn.rappet.xyz
-#      secretName: longhorn-ingress-cert
+  tls:
+    - hosts:
+        - longhorn.rappet.xyz
+      secretName: longhorn-ingress-cert
