@@ -23,7 +23,7 @@ apiVersion: v1
 metadata:
   name: postgres-data
 spec:
-  storageClassName: microk8s-hostpath
+  storageClassName: basic
   accessModes:
     - ReadWriteOnce
   resources:

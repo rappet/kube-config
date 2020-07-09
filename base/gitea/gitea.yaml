@@ -41,7 +41,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: gitea-data
 spec:
-  storageClassName: microk8s-hostpath
+  storageClassName: basic
   accessModes:
     - ReadWriteOnce
   resources:
@@ -74,6 +74,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: gitea-env
+          command:
+            - bash
       volumes:
         - name: data
           persistentVolumeClaim:
