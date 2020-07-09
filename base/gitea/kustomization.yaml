@@ -7,3 +7,8 @@ resources:
   - namespace.yaml
   - gitea.yaml
   - postgres.yaml
+
+configMapGenerator:
+  - name: gitea-config
+    files:
+      - config/app.ini

@@ -71,6 +71,9 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: data
+            - mountPath: /data/gitea/conf/app.ini
+              name: config
+              subPath: app.ini
           envFrom:
             - configMapRef:
                 name: gitea-env
@@ -78,6 +81,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: gitea-data
+        - name: config
+          configMap:
+            name: gitea-config
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
