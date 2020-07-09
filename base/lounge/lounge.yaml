@@ -15,7 +15,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: lounge-data
 spec:
-  storageClassName: microk8s-hostpath
+  storageClassName: basic
   accessModes:
     - ReadWriteOnce
   resources:
