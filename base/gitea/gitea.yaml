@@ -85,7 +85,7 @@ metadata:
   name: gitea-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: buypass-prod
     # Things gitea does not like: many requests
     nginx.ingress.kubernetes.io/limit-rps: "100"
     nginx.ingress.kubernetes.io/limit-rpm: "3000"
