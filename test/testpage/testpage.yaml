@@ -66,12 +66,12 @@ metadata:
   namespace: testpage
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+#    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
     - http:
         paths:
-          - path: /testpage(/|$)(.*)
+          - path: /
             backend:
               serviceName: testpage-service
               servicePort: 80
