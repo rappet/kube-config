@@ -22,3 +22,4 @@ runcmd:
   - snap install microk8s --classic
   - /snap/bin/microk8s status --wait-ready
   - /snap/bin/microk8s enable dashboard dns registry ingress
+  - /snap/bin/microk8s config > /root/kube-config
