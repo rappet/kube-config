@@ -65,7 +65,7 @@ metadata:
   name: testpage-ingress
   namespace: testpage
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: buypass-prod
 spec:
   ingressClassName: public
   rules:
