@@ -74,8 +74,10 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: testpage-service
-              servicePort: 80
+              service:
+                name: testpage-service
+                port:
+                  number: 80
   tls:
     - hosts:
         - testpage.rappet.de
