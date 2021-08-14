@@ -1,5 +1,5 @@
 kind: ClusterIssuer
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 metadata:
   name: letsencrypt-staging
 spec:
@@ -14,7 +14,7 @@ spec:
             class: public
 ---
 kind: ClusterIssuer
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 metadata:
   name: letsencrypt-prod
 spec:
@@ -29,7 +29,7 @@ spec:
             class: public
 ---
 kind: ClusterIssuer
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 metadata:
   name: buypass-staging
 spec:
@@ -44,7 +44,7 @@ spec:
             class: public
 ---
 kind: ClusterIssuer
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 metadata:
   name: buypass-prod
 spec:
