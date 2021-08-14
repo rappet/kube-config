@@ -69,8 +69,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-    - host: 95.216.160.117
-      http:
+    - http:
         paths:
           - path: /testpage(/|$)(.*)
             backend:
