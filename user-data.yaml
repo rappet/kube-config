@@ -1,0 +1,24 @@
+#cloud-config
+users:
+  - name: root
+    lock_passwd: true
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMz+WvOHfl9Er2QIdQsP/z4Qifk8uj75RfNpVa2WVDr rappet@MacBook-Air-von-Raphael.local
+  - name: rappet
+    gecos: Raphael Peters
+    groups: sudo
+    primary_group: rappet
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMz+WvOHfl9Er2QIdQsP/z4Qifk8uj75RfNpVa2WVDr rappet@MacBook-Air-von-Raphael.local
+
+# apt upgrade
+package_upgrade: true
+
+packages:
+  - snapd
+
+runcmd:
+  - snap install microk8s --classic
+  - /snap/bin/microk8s status --wait-ready
+  - /snap/bin/microk8s enable dashboard dns registry ingress

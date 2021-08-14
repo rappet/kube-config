@@ -1,5 +1,0 @@
-# Testpage to test if ingress and cert-manager is working
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: testpage
