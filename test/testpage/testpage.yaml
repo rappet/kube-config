@@ -67,6 +67,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
+  ingressClassName: public
   rules:
     - host: testpage.rappet.de
       http:
