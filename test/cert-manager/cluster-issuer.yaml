@@ -1,0 +1,59 @@
+kind: ClusterIssuer
+apiVersion: cert-manager.io/v1alpha2
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    email: raphael.r.peters@gmail.com
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-staging-issuer-account-key
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+---
+kind: ClusterIssuer
+apiVersion: cert-manager.io/v1alpha2
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    email: raphael.r.peters@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-prod-issuer-account-key
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+---
+kind: ClusterIssuer
+apiVersion: cert-manager.io/v1alpha2
+metadata:
+  name: buypass-staging
+spec:
+  acme:
+    email: raphael.r.peters@gmail.com
+    server: https://api.test4.buypass.no/acme/directory
+    privateKeySecretRef:
+      name: buypass-staging-issuer-account-key
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+---
+kind: ClusterIssuer
+apiVersion: cert-manager.io/v1alpha2
+metadata:
+  name: buypass-prod
+spec:
+  acme:
+    email: raphael.r.peters@gmail.com
+    server: https://api.buypass.com/acme/directory
+    privateKeySecretRef:
+      name: buypass-prod-issuer-account-key
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
